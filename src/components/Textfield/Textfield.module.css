@@ -1,0 +1,151 @@
+.textfieldWrapper {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.textfieldWrapper.fullWidth {
+  width: 100%;
+}
+
+.textfieldWrapper.disabled {
+  opacity: 0.7;
+}
+
+.textfieldWrapper.error {
+  color: #d32f2f;
+}
+
+.label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.label.labelError {
+  color: #d32f2f;
+}
+
+.required {
+  color: #d32f2f;
+  margin-left: 2px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-family: inherit;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.input:hover {
+  border-color: #999;
+}
+
+.input:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+}
+
+.input:disabled {
+  background-color: #f5f5f5;
+  color: #999;
+  cursor: not-allowed;
+  border-color: #ddd;
+}
+
+.input:disabled:hover {
+  border-color: #ddd;
+}
+
+.input.outlined {
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.input.outlined:hover {
+  border-color: #999;
+}
+
+.input.filled {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: #f5f5f5;
+  border-radius: 4px 4px 0 0;
+}
+
+.input.filled:hover {
+  background-color: #eeeeee;
+  border-bottom-color: #999;
+}
+
+.input.filled:focus {
+  background-color: #e3f2fd;
+  border-bottom-color: #1976d2;
+  border-bottom-width: 2px;
+}
+
+.input.standard {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.input.standard:hover {
+  border-bottom-color: #999;
+}
+
+.input.standard:focus {
+  border-bottom-color: #1976d2;
+  border-bottom-width: 2px;
+}
+
+.input.inputError {
+  border-color: #d32f2f;
+}
+
+.input.inputError:hover {
+  border-color: #c62828;
+}
+
+.input.inputError:focus {
+  border-color: #d32f2f;
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
+}
+
+.textfieldWrapper.error .input.filled {
+  background-color: #ffebee;
+  border-bottom-color: #d32f2f;
+}
+
+.textfieldWrapper.error .input.standard {
+  border-bottom-color: #d32f2f;
+}
+
+.helperText {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+  min-height: 20px;
+}
+
+.helperText.helperTextError {
+  color: #d32f2f;
+}
+
+.textfieldWrapper.disabled .input {
+  background-color: #f5f5f5;
+  color: #999;
+}

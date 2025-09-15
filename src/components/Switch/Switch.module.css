@@ -1,0 +1,206 @@
+.switchWrapper {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.switchWrapper.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.switchWrapper.error {
+  color: #d32f2f;
+}
+
+.switchContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.switchWrapper.disabled .switchContainer {
+  cursor: not-allowed;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.track {
+  position: relative;
+  width: 48px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: #ccc;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.input:checked ~ .track {
+  background-color: #1976d2;
+}
+
+.input:checked ~ .track .thumb {
+  left: 26px;
+  background-color: white;
+}
+
+.input:focus ~ .track {
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+}
+
+.input:checked:focus ~ .track {
+  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+}
+
+.switchContainer:hover .track:not(.disabled) {
+  background-color: #b3b3b3;
+}
+
+.input:checked:hover ~ .track {
+  background-color: #1565c0;
+}
+
+.label {
+  margin-left: 12px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  user-select: none;
+}
+
+.label.labelError {
+  color: #d32f2f;
+}
+
+.switchWrapper.disabled .label {
+  color: #999;
+  cursor: not-allowed;
+}
+
+.switchWrapper.disabled .track {
+  background-color: #f5f5f5;
+}
+
+.switchWrapper.disabled .input:checked ~ .track {
+  background-color: #bbdefb;
+}
+
+.switchWrapper.disabled .thumb {
+  background-color: #e0e0e0;
+}
+
+.switchWrapper.error .track {
+  background-color: #ffcdd2;
+}
+
+.switchWrapper.error .input:checked ~ .track {
+  background-color: #d32f2f;
+}
+
+.switchWrapper.error .input:focus ~ .track {
+  box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
+}
+
+.switchWrapper.error .switchContainer:hover .track {
+  background-color: #ef9a9a;
+}
+
+.switchWrapper.error .input:checked:hover ~ .track {
+  background-color: #c62828;
+}
+
+.helperText {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #666;
+  margin-left: 60px;
+}
+
+.helperText.helperTextError {
+  color: #d32f2f;
+}
+
+/* Размеры */
+.switchWrapper.small .track {
+  width: 36px;
+  height: 18px;
+}
+
+.switchWrapper.small .thumb {
+  width: 14px;
+  height: 14px;
+  top: 2px;
+  left: 2px;
+}
+
+.switchWrapper.small .input:checked ~ .track .thumb {
+  left: 20px;
+}
+
+.switchWrapper.small .label {
+  font-size: 14px;
+}
+
+.switchWrapper.small .helperText {
+  margin-left: 48px;
+}
+
+.switchWrapper.large .track {
+  width: 60px;
+  height: 30px;
+}
+
+.switchWrapper.large .thumb {
+  width: 26px;
+  height: 26px;
+  top: 2px;
+  left: 2px;
+}
+
+.switchWrapper.large .input:checked ~ .track .thumb {
+  left: 32px;
+}
+
+.switchWrapper.large .label {
+  font-size: 18px;
+}
+
+.switchWrapper.large .helperText {
+  margin-left: 72px;
+}
+
+/* Анимации */
+.track {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.thumb {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Эффект нажатия */
+.thumb:active {
+  transform: scale(1.1);
+}
+
+.switchWrapper.disabled .thumb:active {
+  transform: none;
+}

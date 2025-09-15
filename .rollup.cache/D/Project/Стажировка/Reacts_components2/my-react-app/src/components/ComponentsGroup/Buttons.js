@@ -1,0 +1,10 @@
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
+import Button from '../Button/Button';
+var Buttons = function () {
+    var handleClick = function () {
+        console.log('Button clicked!');
+    };
+    return (_jsxs(_Fragment, { children: [_jsxs("section", { className: "section", children: [_jsx("h2", { children: "\u0411\u0430\u0437\u043E\u0432\u044B\u0435 \u0432\u0430\u0440\u0438\u0430\u043D\u0442\u044B" }), _jsxs("div", { className: "button-group", children: [_jsx(Button, { variant: "contained", onClick: handleClick, children: "Contained" }), _jsx(Button, { variant: "outlined", onClick: handleClick, children: "Outlined" }), _jsx(Button, { variant: "text", onClick: handleClick, children: "Text" })] })] }), _jsxs("section", { className: "section", children: [_jsx("h2", { children: "\u0420\u0430\u0437\u043C\u0435\u0440\u044B" }), _jsxs("div", { className: "button-group", children: [_jsx(Button, { variant: "contained", size: "small", children: "Small" }), _jsx(Button, { variant: "contained", size: "medium", children: "Medium" }), _jsx(Button, { variant: "contained", size: "large", children: "Large" })] }), _jsxs("div", { className: "button-group", children: [_jsx(Button, { variant: "text", size: "small", disabled: true, children: "Small" }), _jsx(Button, { variant: "text", size: "medium", disabled: true, children: "Medium" }), _jsx(Button, { variant: "text", size: "large", disabled: true, children: "Large" })] }), _jsxs("div", { className: "button-group", children: [_jsx(Button, { variant: "outlined", size: "small", color: "success", children: "Small" }), _jsx(Button, { variant: "outlined", size: "medium", color: "error", children: "Medium" }), _jsx(Button, { variant: "outlined", size: "large", color: "secondary", children: "Large" })] })] })] }));
+};
+export default Buttons;
+//# sourceMappingURL=Buttons.js.map

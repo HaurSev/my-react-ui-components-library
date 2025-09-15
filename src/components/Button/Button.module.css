@@ -1,0 +1,199 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  text-decoration: none;
+}
+
+.button:hover:not(.disabled) {
+  transform: translateY(-1px);
+}
+
+.button:active:not(.disabled) {
+  transform: translateY(0);
+}
+
+.button.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.button.fullWidth {
+  width: 100%;
+}
+
+/* Размеры */
+.button.small {
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+.button.medium {
+  padding: 12px 24px;
+  font-size: 16px;
+}
+
+.button.large {
+  padding: 16px 32px;
+  font-size: 18px;
+}
+
+/* Варианты - Text */
+.button.text {
+  background: transparent;
+  border: none;
+  color: #1976d2;
+}
+
+.button.text:hover:not(.disabled) {
+  background-color: rgba(25, 118, 210, 0.1);
+}
+
+.button.text:active:not(.disabled) {
+  background-color: rgba(25, 118, 210, 0.2);
+}
+
+/* Варианты - Contained */
+.button.contained {
+  border: 2px solid transparent;
+}
+
+.button.contained:hover:not(.disabled) {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Варианты - Outlined */
+.button.outlined {
+  background: transparent;
+  border: 2px solid;
+}
+
+/* Цвета - Primary */
+.button.primary.text {
+  color: #1976d2;
+}
+
+.button.primary.text:hover:not(.disabled) {
+  background-color: rgba(25, 118, 210, 0.1);
+}
+
+.button.primary.contained {
+  background-color: #1976d2;
+  color: white;
+}
+
+.button.primary.contained:hover:not(.disabled) {
+  background-color: #1565c0;
+}
+
+.button.primary.outlined {
+  border-color: #1976d2;
+  color: #1976d2;
+}
+
+.button.primary.outlined:hover:not(.disabled) {
+  background-color: rgba(25, 118, 210, 0.1);
+}
+
+/* Цвета - Secondary */
+.button.secondary.text {
+  color: #6c757d;
+}
+
+.button.secondary.text:hover:not(.disabled) {
+  background-color: rgba(108, 117, 125, 0.1);
+}
+
+.button.secondary.contained {
+  background-color: #6c757d;
+  color: white;
+}
+
+.button.secondary.contained:hover:not(.disabled) {
+  background-color: #5a6268;
+}
+
+.button.secondary.outlined {
+  border-color: #6c757d;
+  color: #6c757d;
+}
+
+.button.secondary.outlined:hover:not(.disabled) {
+  background-color: rgba(108, 117, 125, 0.1);
+}
+
+/* Цвета - Success */
+.button.success.text {
+  color: #28a745;
+}
+
+.button.success.text:hover:not(.disabled) {
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.button.success.contained {
+  background-color: #28a745;
+  color: white;
+}
+
+.button.success.contained:hover:not(.disabled) {
+  background-color: #218838;
+}
+
+.button.success.outlined {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.button.success.outlined:hover:not(.disabled) {
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+/* Цвета - Error */
+.button.error.text {
+  color: #dc3545;
+}
+
+.button.error.text:hover:not(.disabled) {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.button.error.contained {
+  background-color: #dc3545;
+  color: white;
+}
+
+.button.error.contained:hover:not(.disabled) {
+  background-color: #c82333;
+}
+
+.button.error.outlined {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+.button.error.outlined:hover:not(.disabled) {
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* Disabled состояния */
+.button.disabled.text {
+  color: #999;
+}
+
+.button.disabled.contained {
+  background-color: #ccc;
+  color: #666;
+}
+
+.button.disabled.outlined {
+  border-color: #ccc;
+  color: #999;
+}

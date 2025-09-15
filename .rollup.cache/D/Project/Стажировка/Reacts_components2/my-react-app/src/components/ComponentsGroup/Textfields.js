@@ -1,0 +1,7 @@
+import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
+import Textfield from "../Textfield/Textfield";
+var TextFields = function () {
+    return (_jsxs(_Fragment, { children: [_jsx(Textfield, { label: "Email", name: "email", type: "email", placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0432\u0430\u0448 email", variant: "outlined", required: true }), _jsx(Textfield, { label: "\u041F\u0430\u0440\u043E\u043B\u044C", name: "password", type: "password", placeholder: "\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u043F\u0430\u0440\u043E\u043B\u044C", helperText: "\u041C\u0438\u043D\u0438\u043C\u0443\u043C 8 \u0441\u0438\u043C\u0432\u043E\u043B\u043E\u0432", variant: "filled" }), _jsx(Textfield, { label: "\u041E\u0448\u0438\u0431\u043A\u0430", name: "error", error: "Error", type: "password", placeholder: "\u041E\u0448\u0438\u0431\u043A\u0430", variant: "standard" }), _jsx(Textfield, { label: "\u041D\u0435\u0434\u043E\u0441\u0442\u0443\u043F\u043D\u0430", name: "Disabled", type: "disabled", placeholder: "\u041E\u0448\u0438\u0431\u043A\u0430", variant: "filled", disabled: true })] }));
+};
+export default TextFields;
+//# sourceMappingURL=Textfields.js.map

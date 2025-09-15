@@ -1,0 +1,27 @@
+src/
+__mocks__/
+*.config.js
+*.test.*
+*.stories.*
+.storybook/
+.eslintrc
+.prettierrc
+jest.config.js
+babel.config.js
+rollup.config.js
+
+# Исходные файлы
+*.ts
+*.tsx
+!*.d.ts
+
+# Документация и настройки
+README.md
+LICENSE
+.gitignore
+.npmignore
+
+# Временные файлы
+dist/types/
+*.log
+*.tmp

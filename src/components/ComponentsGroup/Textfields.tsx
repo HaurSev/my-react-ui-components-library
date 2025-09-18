@@ -1,8 +1,8 @@
-import Textfield from "../Textfield/Textfield";
+import { Textfield } from '../Textfield/Textfield';
 const TextFields = () => {
-    return(
-        <>
-        <Textfield
+  return (
+    <>
+      <Textfield
         label="Email"
         name="email"
         type="email"
@@ -23,7 +23,8 @@ const TextFields = () => {
       <Textfield
         label="Ошибка"
         name="error"
-        error="Error"
+        error={true}
+        helperText="Ошибка"
         type="password"
         placeholder="Ошибка"
         variant="standard"
@@ -36,8 +37,7 @@ const TextFields = () => {
         variant="filled"
         disabled
       />
-
-        </>
-    )
-}
-export default TextFields
+    </>
+  );
+};
+export { TextFields };

@@ -11,9 +11,7 @@ export const ModalActions: React.FC<ModalActionsProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`${styles.modalActions} ${className}`}>
-      {children}
-    </div>
+    <div className={`${styles.modalActions} ${className}`}>{children}</div>
   );
 };
 

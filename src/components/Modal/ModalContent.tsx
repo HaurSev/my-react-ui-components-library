@@ -11,9 +11,7 @@ export const ModalContent: React.FC<ModalContentProps> = ({
   className = '',
 }) => {
   return (
-    <div className={`${styles.modalContent} ${className}`}>
-      {children}
-    </div>
+    <div className={`${styles.modalContent} ${className}`}>{children}</div>
   );
 };
 

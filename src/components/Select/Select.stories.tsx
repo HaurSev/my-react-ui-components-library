@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import { Select, Option } from './Select';
+import { Select } from './Select';
 
 const meta: Meta<typeof Select> = {
   title: 'Components/Select',
@@ -22,16 +22,16 @@ const meta: Meta<typeof Select> = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const baseOptions = [
+  { value: '', label: 'Select an option' },
+  { value: 'option1', label: 'Option 1' },
+  { value: 'option2', label: 'Option 2' },
+  { value: 'option3', label: 'Option 3' },
+];
+
 // Basic Select
 export const Default: Story = {
-  render: (args) => (
-    <Select {...args}>
-      <Option value="">Select an option</Option>
-      <Option value="option1">Option 1</Option>
-      <Option value="option2">Option 2</Option>
-      <Option value="option3">Option 3</Option>
-    </Select>
-  ),
+  render: (args) => <Select {...args} options={baseOptions} />,
   args: {
     label: 'Select Option',
   },
@@ -39,14 +39,7 @@ export const Default: Story = {
 
 // With Default Value
 export const WithDefaultValue: Story = {
-  render: (args) => (
-    <Select {...args}>
-      <Option value="">Select an option</Option>
-      <Option value="option1">Option 1</Option>
-      <Option value="option2">Option 2</Option>
-      <Option value="option3">Option 3</Option>
-    </Select>
-  ),
+  render: (args) => <Select {...args} options={baseOptions} />,
   args: {
     label: 'Select with default',
     value: 'option2',
@@ -55,28 +48,17 @@ export const WithDefaultValue: Story = {
 
 // With Error
 export const WithError: Story = {
-  render: (args) => (
-    <Select {...args}>
-      <Option value="">Select an option</Option>
-      <Option value="option1">Option 1</Option>
-      <Option value="option2">Option 2</Option>
-    </Select>
-  ),
+  render: (args) => <Select {...args} options={baseOptions} />,
   args: {
     label: 'Select with error',
-    error: 'This field is required',
+    helperText: 'This field is required',
+    error: true,
   },
 };
 
 // Disabled
 export const Disabled: Story = {
-  render: (args) => (
-    <Select {...args}>
-      <Option value="">Select an option</Option>
-      <Option value="option1">Option 1</Option>
-      <Option value="option2">Option 2</Option>
-    </Select>
-  ),
+  render: (args) => <Select {...args} options={baseOptions} />,
   args: {
     label: 'Disabled Select',
     disabled: true,
@@ -85,13 +67,7 @@ export const Disabled: Story = {
 
 // Full Width
 export const FullWidth: Story = {
-  render: (args) => (
-    <Select {...args}>
-      <Option value="">Select an option</Option>
-      <Option value="option1">Option 1</Option>
-      <Option value="option2">Option 2</Option>
-    </Select>
-  ),
+  render: (args) => <Select {...args} options={baseOptions} />,
   args: {
     label: 'Full Width Select',
     fullWidth: true,
@@ -101,16 +77,19 @@ export const FullWidth: Story = {
 // Many Options
 export const ManyOptions: Story = {
   render: (args) => (
-    <Select {...args}>
-      <Option value="">Choose a country</Option>
-      <Option value="us">United States</Option>
-      <Option value="ca">Canada</Option>
-      <Option value="uk">United Kingdom</Option>
-      <Option value="de">Germany</Option>
-      <Option value="fr">France</Option>
-      <Option value="jp">Japan</Option>
-      <Option value="au">Australia</Option>
-    </Select>
+    <Select
+      {...args}
+      options={[
+        { value: '', label: 'Choose a country' },
+        { value: 'us', label: 'United States' },
+        { value: 'ca', label: 'Canada' },
+        { value: 'uk', label: 'United Kingdom' },
+        { value: 'de', label: 'Germany' },
+        { value: 'fr', label: 'France' },
+        { value: 'jp', label: 'Japan' },
+        { value: 'au', label: 'Australia' },
+      ]}
+    />
   ),
   args: {
     label: 'Country',

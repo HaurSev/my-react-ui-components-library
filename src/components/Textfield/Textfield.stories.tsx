@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Textfield from './Textfield';
+import { Textfield } from './Textfield';
 
 const meta: Meta<typeof Textfield> = {
   title: 'Components/Textfield',
@@ -41,10 +41,25 @@ export const Default: Story = {
 // Variants
 export const Variants: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '300px' }}>
-      <Textfield label="Outlined" variant="outlined" placeholder="Outlined variant" />
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        maxWidth: '300px',
+      }}
+    >
+      <Textfield
+        label="Outlined"
+        variant="outlined"
+        placeholder="Outlined variant"
+      />
       <Textfield label="Filled" variant="filled" placeholder="Filled variant" />
-      <Textfield label="Standard" variant="standard" placeholder="Standard variant" />
+      <Textfield
+        label="Standard"
+        variant="standard"
+        placeholder="Standard variant"
+      />
     </div>
   ),
 };
@@ -53,7 +68,8 @@ export const Variants: Story = {
 export const WithError: Story = {
   args: {
     label: 'Email',
-    error: 'Invalid email address',
+    error: true,
+    helperText: 'Invalid email address',
     defaultValue: 'invalid-email',
   },
 };
@@ -79,9 +95,20 @@ export const Disabled: Story = {
 // Types
 export const DifferentTypes: Story = {
   render: () => (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '300px' }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '16px',
+        maxWidth: '300px',
+      }}
+    >
       <Textfield label="Email" type="email" placeholder="user@example.com" />
-      <Textfield label="Password" type="password" placeholder="Enter password" />
+      <Textfield
+        label="Password"
+        type="password"
+        placeholder="Enter password"
+      />
       <Textfield label="Number" type="number" placeholder="Enter number" />
       <Textfield label="Search" type="search" placeholder="Search..." />
     </div>

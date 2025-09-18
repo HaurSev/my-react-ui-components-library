@@ -1,7 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { createRef } from 'react';
 
-import Button from './Button';
+import { Button } from './Button';
 
 describe('Button Component', () => {
   test('renders button with text', () => {
@@ -44,14 +44,20 @@ describe('Button Component', () => {
 
   test('does not call onClick when disabled', () => {
     const handleClick = jest.fn();
-    render(<Button disabled onClick={handleClick}>Disabled</Button>);
+    render(
+      <Button disabled onClick={handleClick}>
+        Disabled
+      </Button>,
+    );
 
     fireEvent.click(screen.getByText('Disabled'));
     expect(handleClick).not.toHaveBeenCalled();
   });
 
   test('applies custom className', () => {
-    const { container } = render(<Button className="custom-class">Test</Button>);
+    const { container } = render(
+      <Button className="custom-class">Test</Button>,
+    );
     expect(container.firstChild).toHaveClass('custom-class');
   });
 

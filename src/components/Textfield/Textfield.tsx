@@ -1,15 +1,16 @@
-import React from 'react';
+import { forwardRef, useId } from 'react';
 import styles from './Textfield.module.css';
 
-export interface TextfieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
+export interface TextfieldProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
-  error?: string;
+  error?: boolean;
   helperText?: string;
   fullWidth?: boolean;
   variant?: 'outlined' | 'filled' | 'standard';
 }
 
-const Textfield = React.forwardRef<HTMLInputElement, TextfieldProps>(
+const Textfield = forwardRef<HTMLInputElement, TextfieldProps>(
   (
     {
       label,
@@ -23,9 +24,9 @@ const Textfield = React.forwardRef<HTMLInputElement, TextfieldProps>(
       disabled,
       ...rest
     },
-    ref
+    ref,
   ) => {
-    const generatedId = React.useId();
+    const generatedId = useId();
     const inputId = id || generatedId;
 
     const wrapperClasses = [
@@ -33,24 +34,29 @@ const Textfield = React.forwardRef<HTMLInputElement, TextfieldProps>(
       fullWidth && styles.fullWidth,
       disabled && styles.disabled,
       error && styles.error,
-      className
-    ].filter(Boolean).join(' ');
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-    const labelClasses = [
-      styles.label,
-      error && styles.labelError
-    ].filter(Boolean).join(' ');
+    const labelClasses = [styles.label, error && styles.labelError]
+      .filter(Boolean)
+      .join(' ');
 
     const inputClasses = [
       styles.input,
       styles[variant],
-      error && styles.inputError
-    ].filter(Boolean).join(' ');
+      error && styles.inputError,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     const helperTextClasses = [
       styles.helperText,
-      error && styles.helperTextError
-    ].filter(Boolean).join(' ');
+      error && styles.helperTextError,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <div className={wrapperClasses}>
@@ -60,7 +66,7 @@ const Textfield = React.forwardRef<HTMLInputElement, TextfieldProps>(
             {required && <span className={styles.required}>*</span>}
           </label>
         )}
-        
+
         <input
           ref={ref}
           id={inputId}
@@ -68,20 +74,20 @@ const Textfield = React.forwardRef<HTMLInputElement, TextfieldProps>(
           disabled={disabled}
           required={required}
           aria-invalid={!!error}
-          aria-describedby={error ? `${inputId}-error` : undefined}
+          aria-describedby={helperText ? `${inputId}-helper` : undefined}
           {...rest}
         />
 
-        {(error || helperText) && (
-          <div id={`${inputId}-error`} className={helperTextClasses}>
-            {error || helperText}
+        {helperText && (
+          <div id={`${inputId}-helper`} className={helperTextClasses}>
+            {helperText}
           </div>
         )}
       </div>
     );
-  }
+  },
 );
 
 Textfield.displayName = 'Textfield';
 
-export default Textfield;
+export { Textfield };

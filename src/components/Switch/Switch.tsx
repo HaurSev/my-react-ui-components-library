@@ -1,14 +1,20 @@
-import React from 'react';
+import { forwardRef, useId, useState, useMemo } from 'react';
 import styles from './Switch.module.css';
 
-export interface SwitchProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface SwitchProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'onChange' | 'checked' | 'defaultChecked'
+  > {
   label?: string;
-  error?: string;
+  error?: boolean;
   helperText?: string;
+  checked?: boolean;
+  defaultChecked?: boolean;
   onChange?: (checked: boolean) => void;
 }
 
-const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
+const Switch = forwardRef<HTMLInputElement, SwitchProps>(
   (
     {
       label,
@@ -17,75 +23,84 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       className = '',
       id,
       checked,
+      defaultChecked,
       disabled,
       onChange,
       ...rest
     },
-    ref
+    ref,
   ) => {
-    const generatedId = React.useId();
+    const generatedId = useId();
     const switchId = id || generatedId;
+
+    const isControlled = useMemo(() => typeof checked === 'boolean', [checked]);
+    const [uncontrolledChecked, setUncontrolledChecked] = useState<boolean>(
+      defaultChecked ?? false,
+    );
+    const currentChecked = isControlled
+      ? (checked as boolean)
+      : uncontrolledChecked;
 
     const wrapperClasses = [
       styles.switchWrapper,
       disabled && styles.disabled,
       error && styles.error,
-      className
-    ].filter(Boolean).join(' ');
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-    const labelClasses = [
-      styles.label,
-      error && styles.labelError
-    ].filter(Boolean).join(' ');
+    const labelClasses = [styles.label, error && styles.labelError]
+      .filter(Boolean)
+      .join(' ');
 
     const helperTextClasses = [
       styles.helperText,
-      error && styles.helperTextError
-    ].filter(Boolean).join(' ');
+      error && styles.helperTextError,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (onChange) {
-        onChange(event.target.checked);
+      const next = event.target.checked;
+      if (!isControlled) {
+        setUncontrolledChecked(next);
       }
+      onChange?.(next);
     };
 
     return (
       <div className={wrapperClasses}>
-        <div className={styles.switchContainer}>
+        <label className={styles.switchContainer}>
           <input
             ref={ref}
             id={switchId}
             type="checkbox"
             className={styles.input}
-            checked={checked}
+            checked={currentChecked}
             disabled={disabled}
             onChange={handleChange}
             aria-invalid={!!error}
-            aria-describedby={error ? `${switchId}-error` : undefined}
+            aria-describedby={helperText ? `${switchId}-helper` : undefined}
             {...rest}
           />
-          
           <span className={styles.track}>
             <span className={styles.thumb} />
           </span>
 
-          {label && (
-            <label htmlFor={switchId} className={labelClasses}>
-              {label}
-            </label>
-          )}
-        </div>
+          {label && <span className={labelClasses}>{label}</span>}
+        </label>
 
-        {(error || helperText) && (
-          <div id={`${switchId}-error`} className={helperTextClasses}>
-            {error || helperText}
+        {helperText && (
+          <div id={`${switchId}-helper`} className={helperTextClasses}>
+            {helperText}
           </div>
         )}
       </div>
     );
-  }
+  },
 );
 
 Switch.displayName = 'Switch';
 
-export default Switch;
+export { Switch };

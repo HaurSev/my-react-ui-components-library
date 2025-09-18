@@ -1,11 +1,11 @@
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 const Buttons = () => {
-    const handleClick = () => {
+  const handleClick = () => {
     console.log('Button clicked!');
   };
-    return (
-        <>
-        {/* Базовые варианты */}
+  return (
+    <>
+      {/* Базовые варианты */}
       <section className="section">
         <h2>Базовые варианты</h2>
         <div className="button-group">
@@ -28,31 +28,31 @@ const Buttons = () => {
           <Button variant="contained" size="small">
             Small
           </Button>
-          
+
           <Button variant="contained" size="medium">
             Medium
           </Button>
           <Button variant="contained" size="large">
             Large
           </Button>
-          </div>
-          <div className="button-group">
+        </div>
+        <div className="button-group">
           <Button variant="text" size="small" disabled>
             Small
           </Button>
-          
+
           <Button variant="text" size="medium" disabled>
             Medium
           </Button>
           <Button variant="text" size="large" disabled>
             Large
           </Button>
-          </div>
-          <div className="button-group">
-          <Button variant="outlined" size="small" color="success">
+        </div>
+        <div className="button-group">
+          <Button variant="outlined" size="small" color="primary">
             Small
           </Button>
-          
+
           <Button variant="outlined" size="medium" color="error">
             Medium
           </Button>
@@ -61,7 +61,7 @@ const Buttons = () => {
           </Button>
         </div>
       </section>
-      </>
-    )
-}
-export default Buttons;
+    </>
+  );
+};
+export { Buttons };

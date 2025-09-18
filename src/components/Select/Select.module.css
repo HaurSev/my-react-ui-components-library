@@ -3,24 +3,24 @@
   flex-direction: column;
   margin-bottom: 16px;
   position: relative;
-}
 
-.selectWrapper.fullWidth {
-  width: 100%;
-}
+  &.fullWidth {
+    width: 100%;
+  }
 
-.selectWrapper.disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+  &.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 
-.selectWrapper.error {
-  color: #d32f2f;
-}
+  &.error {
+    color: var(--color-error);
+  }
 
-.selectWrapper.open .select {
-  border-color: #1976d2;
-  box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.2);
+  &.open .select {
+    border-color: var(--color-primary);
+    box-shadow: var(--focus-ring);
+  }
 }
 
 .label {
@@ -28,16 +28,16 @@
   margin-bottom: 8px;
   font-weight: 500;
   font-size: 14px;
-  color: #333;
+  color: var(--color-text);
   cursor: pointer;
-}
 
-.label.labelError {
-  color: #d32f2f;
+  &.labelError {
+    color: var(--color-error);
+  }
 }
 
 .required {
-  color: #d32f2f;
+  color: var(--color-error);
   margin-left: 2px;
 }
 
@@ -47,38 +47,38 @@
   justify-content: space-between;
   padding: 12px 16px;
   font-size: 16px;
-  font-family: inherit;
-  border: 1px solid #ccc;
+  font-family: var(--font-family-sans);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
-  background-color: #fff;
+  background-color: var(--color-surface);
   cursor: pointer;
   transition: all 0.3s ease;
   outline: none;
   min-height: 48px;
   box-sizing: border-box;
-}
 
-.select:hover:not(.disabled) {
-  border-color: #999;
-}
+  &:hover:not(.disabled) {
+    border-color: var(--color-text-muted);
+  }
 
-.select:focus {
-  border-color: #1976d2;
-}
+  &:focus {
+    border-color: var(--color-primary);
+  }
 
-.select.selectError {
-  border-color: #d32f2f;
-}
+  &.selectError {
+    border-color: var(--color-error);
 
-.select.selectError:hover:not(.disabled) {
-  border-color: #c62828;
+    &:hover:not(.disabled) {
+      border-color: var(--color-error-hover);
+    }
+  }
 }
 
 .selectWrapper.disabled .select {
-  background-color: #f5f5f5;
-  color: #999;
+  background-color: var(--color-disabled-bg);
+  color: var(--color-disabled);
   cursor: not-allowed;
-  border-color: #ddd;
+  border-color: var(--color-border-strong);
 }
 
 .selectedValue {
@@ -91,7 +91,7 @@
 .arrow {
   margin-left: 8px;
   transition: transform 0.3s ease;
-  color: #666;
+  color: var(--color-text-muted);
 }
 
 .selectWrapper.open .arrow {
@@ -103,8 +103,8 @@
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #fff;
-  border: 1px solid #ccc;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: 4px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
@@ -122,16 +122,16 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   font-size: 16px;
-}
 
-.option:hover {
-  background-color: #f5f5f5;
+  &:hover {
+    background-color: #f5f5f5;
+  }
 }
 
 .optionSelected,
 .option.optionSelected {
   background-color: #e3f2fd;
-  color: #1976d2;
+  color: var(--color-primary);
   font-weight: 500;
 }
 
@@ -142,12 +142,12 @@
 .helperText {
   margin-top: 4px;
   font-size: 12px;
-  color: #666;
+  color: var(--color-text-muted);
   min-height: 20px;
-}
 
-.helperText.helperTextError {
-  color: #d32f2f;
+  &.helperTextError {
+    color: var(--color-error);
+  }
 }
 
 /* Scrollbar styling */

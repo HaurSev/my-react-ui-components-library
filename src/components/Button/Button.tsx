@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './Button.module.css';
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'text' | 'contained' | 'outlined';
   size?: 'small' | 'medium' | 'large';
-  color?: 'primary' | 'secondary' | 'success' | 'error';
+  color?: 'primary' | 'secondary' | 'error';
   fullWidth?: boolean;
 }
 
@@ -21,7 +22,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       type = 'button',
       ...rest
     },
-    ref
+    ref,
   ) => {
     const buttonClasses = [
       styles.button,
@@ -30,8 +31,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       styles[color],
       fullWidth && styles.fullWidth,
       disabled && styles.disabled,
-      className
-    ].filter(Boolean).join(' ');
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     return (
       <button
@@ -44,9 +47,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {children}
       </button>
     );
-  }
+  },
 );
 
 Button.displayName = 'Button';
 
-export default Button;
+export { Button };

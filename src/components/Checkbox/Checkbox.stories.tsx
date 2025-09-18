@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Checkbox from './Checkbox';
+import { Checkbox } from './Checkbox';
 
 const meta: Meta<typeof Checkbox> = {
   title: 'Components/Checkbox',
@@ -60,7 +60,8 @@ export const Disabled: Story = {
 export const WithError: Story = {
   args: {
     label: 'Checkbox with error',
-    error: 'This field is required',
+    error: true,
+    helperText: 'This field is required',
   },
 };
 

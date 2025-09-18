@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { createRef } from 'react';
-import Textfield from './Textfield';
+import { Textfield } from './Textfield';
 
 describe('Textfield Component', () => {
   test('renders textfield with label', () => {
@@ -19,7 +19,7 @@ describe('Textfield Component', () => {
   });
 
   test('displays error message', () => {
-    render(<Textfield error="Invalid input" />);
+    render(<Textfield error={true} helperText="Invalid input" />);
     expect(screen.getByText('Invalid input')).toBeInTheDocument();
     expect(screen.getByRole('textbox')).toHaveAttribute('aria-invalid', 'true');
   });
@@ -43,7 +43,9 @@ describe('Textfield Component', () => {
     const handleChange = jest.fn();
     render(<Textfield onChange={handleChange} />);
 
-    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'test' } });
+    fireEvent.change(screen.getByRole('textbox'), {
+      target: { value: 'test' },
+    });
     expect(handleChange).toHaveBeenCalledTimes(1);
   });
 

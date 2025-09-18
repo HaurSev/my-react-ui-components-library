@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
-import Modal from '../Modal/Modal';
+import { Modal } from '../Modal/Modal';
 import { ModalHeader } from '../Modal/ModalHeader';
 import { ModalActions } from '../Modal/ModalActions';
 import { ModalContent } from '../Modal/ModalContent';
-import Button from '../Button/Button';
-import Textfield from '../Textfield/Textfield';
+import { Button } from '../Button/Button';
+import { Textfield } from '../Textfield/Textfield';
 const Modals = () => {
   const [isOpen, setIsOpen] = useState(false);
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -24,25 +24,14 @@ const Modals = () => {
         ariaLabelledby="modal-title"
         ariaDescribedby="modal-description"
       >
-        <ModalHeader onClose={handleClose}>
-          Create Account
-        </ModalHeader>
+        <ModalHeader onClose={handleClose}>Create Account</ModalHeader>
 
         <ModalContent>
           <div id="modal-description">
             <p>Please fill in the form below:</p>
-            <Textfield
-              label="First Name"
-              ref={firstNameRef}
-              autoFocus // Автофокус на первое поле
-            />
-            <Textfield
-              label="Last Name"
-            />
-            <Textfield
-              label="Email"
-              type="email"
-            />
+            <Textfield label="First Name" ref={firstNameRef} autoFocus />
+            <Textfield label="Last Name" />
+            <Textfield label="Email" type="email" />
           </div>
         </ModalContent>
 
@@ -57,5 +46,5 @@ const Modals = () => {
       </Modal>
     </div>
   );
-}
-export default Modals;
+};
+export { Modals };

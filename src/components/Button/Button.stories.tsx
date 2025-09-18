@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import Button from './Button';
+import { Button } from './Button';
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
@@ -16,7 +16,7 @@ const meta: Meta<typeof Button> = {
     },
     color: {
       control: 'select',
-      options: ['primary', 'secondary', 'success', 'error'],
+      options: ['primary', 'secondary', 'error'],
     },
     disabled: {
       control: 'boolean',
@@ -57,7 +57,7 @@ export const Colors: Story = {
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
       <Button color="primary">Primary</Button>
       <Button color="secondary">Secondary</Button>
-      <Button color="success">Success</Button>
+      <Button color="error">Error</Button>
       <Button color="error">Error</Button>
     </div>
   ),
@@ -78,9 +78,15 @@ export const Sizes: Story = {
 export const Disabled: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-      <Button variant="contained" disabled>Contained Disabled</Button>
-      <Button variant="outlined" disabled>Outlined Disabled</Button>
-      <Button variant="text" disabled>Text Disabled</Button>
+      <Button variant="contained" disabled>
+        Contained Disabled
+      </Button>
+      <Button variant="outlined" disabled>
+        Outlined Disabled
+      </Button>
+      <Button variant="text" disabled>
+        Text Disabled
+      </Button>
     </div>
   ),
 };

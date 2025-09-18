@@ -1,52 +1,27 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useId, useMemo, forwardRef } from 'react';
 import styles from './Select.module.css';
 
-export interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, 'onChange' | 'children'> {
+interface SelectOption {
+  value: string;
+  label: React.ReactNode;
+}
+
+export interface SelectProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   label?: string;
-  error?: string;
+  error?: boolean;
   helperText?: string;
   fullWidth?: boolean;
   onChange?: (value: string) => void;
-  children: React.ReactNode;
+  options: SelectOption[];
+  value?: string;
+  defaultValue?: string;
+  disabled?: boolean;
+  required?: boolean;
+  id?: string;
 }
 
-export interface OptionProps extends React.OptionHTMLAttributes<HTMLOptionElement> {
-  value: string;
-  children: React.ReactNode;
-  onClick?: () => void;
-  isSelected?: boolean;
-  className?: string;
-}
-
-const Option: React.FC<OptionProps> = ({ 
-  children, 
-  onClick, 
-  isSelected, 
-  className = '', 
-  ...rest 
-}) => {
-  const optionClasses = [
-    styles.option,
-    isSelected && styles.optionSelected,
-    className
-  ].filter(Boolean).join(' ');
-
-  return (
-    <option
-      className={optionClasses}
-      onClick={onClick}
-      role="option"
-      aria-selected={isSelected}
-      {...rest}
-    >
-      {children}
-    </option>
-  );
-};
-
-Option.displayName = 'Option';
-
-const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
+const Select = forwardRef<HTMLDivElement, SelectProps>(
   (
     {
       label,
@@ -57,18 +32,25 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       id,
       required,
       disabled,
-      children,
       onChange,
-      value
+      options,
+      value,
+      defaultValue,
+      ...rest
     },
-    _ref
+    ref,
   ): React.JSX.Element => {
     const [isOpen, setIsOpen] = useState(false);
-    const [internalValue, setInternalValue] = useState(value || '');
+    const isControlled = useMemo(() => value !== undefined, [value]);
+    const [internalValue, setInternalValue] = useState<string>(
+      defaultValue ?? '',
+    );
     const selectRef = useRef<HTMLDivElement>(null);
 
-    const generatedId = React.useId();
+    const generatedId = useId();
     const selectId = id || generatedId;
+
+    const currentValue = isControlled ? (value as string) : internalValue;
 
     const wrapperClasses = [
       styles.selectWrapper,
@@ -76,23 +58,25 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       disabled && styles.disabled,
       error && styles.error,
       isOpen && styles.open,
-      className
-    ].filter(Boolean).join(' ');
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-    const labelClasses = [
-      styles.label,
-      error && styles.labelError
-    ].filter(Boolean).join(' ');
+    const labelClasses = [styles.label, error && styles.labelError]
+      .filter(Boolean)
+      .join(' ');
 
-    const selectClasses = [
-      styles.select,
-      error && styles.selectError
-    ].filter(Boolean).join(' ');
+    const selectClasses = [styles.select, error && styles.selectError]
+      .filter(Boolean)
+      .join(' ');
 
     const helperTextClasses = [
       styles.helperText,
-      error && styles.helperTextError
-    ].filter(Boolean).join(' ');
+      error && styles.helperTextError,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     const handleToggle = () => {
       if (!disabled) {
@@ -100,101 +84,95 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
       }
     };
 
-    const handleOptionClick = (value: string) => {
-      setInternalValue(value);
-      onChange?.(value);
+    const handleOptionClick = (val: string) => {
+      if (!isControlled) setInternalValue(val);
+      onChange?.(val);
       setIsOpen(false);
     };
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (selectRef.current && !selectRef.current.contains(event.target as Node)) {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
     useEffect(() => {
       document.addEventListener('mousedown', handleClickOutside);
-      return () => document.removeEventListener('mousedown', handleClickOutside);
+      return () =>
+        document.removeEventListener('mousedown', handleClickOutside);
     }, []);
 
     useEffect(() => {
-      if (value !== undefined) {
+      if (isControlled && value !== undefined) {
         setInternalValue(value);
       }
-    }, [value]);
+    }, [isControlled, value]);
 
-    // Типизированный поиск выбранной опции
-    const selectedOption = React.Children.toArray(children).find(
-      (child): child is React.ReactElement<OptionProps> => 
-        React.isValidElement(child) && 
-        (child as React.ReactElement).type === Option &&
-        (child as React.ReactElement<OptionProps>).props.value === internalValue
-    );
-
-    const selectedLabel = selectedOption 
-      ? selectedOption.props.children 
-      : 'Select an option';
+    const selected = options.find((o) => o.value === currentValue);
+    const selectedLabel = selected ? selected.label : 'Select an option';
 
     return (
-      <div ref={selectRef} className={wrapperClasses}>
+      <div ref={ref ?? selectRef} className={wrapperClasses} {...rest}>
         {label && (
           <label htmlFor={selectId} className={labelClasses}>
             {label}
             {required && <span className={styles.required}>*</span>}
           </label>
         )}
-        
-        <div 
-          className={selectClasses} 
+
+        <div
+          ref={selectRef}
+          className={selectClasses}
           onClick={handleToggle}
           role="combobox"
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-disabled={disabled}
         >
-          <div className={styles.selectedValue}>
-            {selectedLabel}
-          </div>
+          <div className={styles.selectedValue}>{selectedLabel}</div>
           <span className={styles.arrow}>▼</span>
         </div>
 
-
         {isOpen && (
-          <div 
+          <div
             className={styles.dropdown}
             role="listbox"
             aria-labelledby={selectId}
           >
             <div className={styles.optionsList}>
-              {React.Children.map(children, (child) => {
-                if (React.isValidElement<OptionProps>(child) && child.type === Option) {
-                  const optionValue = child.props.value;
-                  return React.cloneElement(child, {
-                    onClick: () => handleOptionClick(optionValue),
-                    isSelected: optionValue === internalValue,
-                    className: [
-                      child.props.className,
+              {options.map((opt) => {
+                const isSelected = opt.value === currentValue;
+                return (
+                  <div
+                    key={opt.value}
+                    className={[
                       styles.option,
-                      optionValue === internalValue && styles.optionSelected
-                    ].filter(Boolean).join(' ')
-                  } as Partial<OptionProps>);
-                }
-                return child;
+                      isSelected && styles.optionSelected,
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                    role="option"
+                    aria-selected={isSelected}
+                    onClick={() => handleOptionClick(opt.value)}
+                  >
+                    {opt.label}
+                  </div>
+                );
               })}
             </div>
           </div>
         )}
 
-        {(error || helperText) && (
-          <div className={helperTextClasses}>
-            {error || helperText}
-          </div>
-        )}
+        {helperText && <div className={helperTextClasses}>{helperText}</div>}
       </div>
     );
-  }
+  },
 );
 
 Select.displayName = 'Select';
 
-export { Select, Option };
+export { Select };
+export type { SelectOption };

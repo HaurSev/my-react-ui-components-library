@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Select, Option } from "../Select/Select";
+import { useState } from 'react';
+import { Select } from '../Select/Select';
 const Selects = () => {
   const [selectedValue, setSelectedValue] = useState('');
   return (
@@ -8,11 +8,14 @@ const Selects = () => {
         label="Choose an option"
         value={selectedValue}
         onChange={setSelectedValue}
-      >
-        <Option value="">Select an option</Option>
-        <Option value="option1">Option 1</Option>
-        <Option value="option2">Option 2</Option>
-        <Option value="option3">Option 3</Option>
-      </Select></>)
-}
-export default Selects
+        options={[
+          { value: '', label: 'Select an option' },
+          { value: 'option1', label: 'Option 1' },
+          { value: 'option2', label: 'Option 2' },
+          { value: 'option3', label: 'Option 3' },
+        ]}
+      />
+    </>
+  );
+};
+export { Selects };

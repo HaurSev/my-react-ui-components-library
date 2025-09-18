@@ -1,15 +1,21 @@
-import React from 'react';
+import { forwardRef, useId, useState, useMemo } from 'react';
 import styles from './Checkbox.module.css';
 
-export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'> {
+export interface CheckboxProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    'onChange' | 'checked' | 'defaultChecked'
+  > {
   label?: string;
-  error?: string;
+  error?: boolean;
   helperText?: string;
   indeterminate?: boolean;
+  checked?: boolean;
+  defaultChecked?: boolean;
   onChange?: (checked: boolean) => void;
 }
 
-const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
+const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
       label,
@@ -19,81 +25,91 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       className = '',
       id,
       checked,
+      defaultChecked,
       disabled,
       onChange,
       ...rest
     },
-    ref
+    ref,
   ) => {
-    const generatedId = React.useId();
+    const generatedId = useId();
     const checkboxId = id || generatedId;
+
+    const isControlled = useMemo(() => typeof checked === 'boolean', [checked]);
+    const [uncontrolledChecked, setUncontrolledChecked] = useState<boolean>(
+      defaultChecked ?? false,
+    );
+    const currentChecked = isControlled
+      ? (checked as boolean)
+      : uncontrolledChecked;
 
     const wrapperClasses = [
       styles.checkboxWrapper,
       disabled && styles.disabled,
       error && styles.error,
-      className
-    ].filter(Boolean).join(' ');
+      className,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
-    const labelClasses = [
-      styles.label,
-      error && styles.labelError
-    ].filter(Boolean).join(' ');
+    const labelClasses = [styles.label, error && styles.labelError]
+      .filter(Boolean)
+      .join(' ');
 
     const helperTextClasses = [
       styles.helperText,
-      error && styles.helperTextError
-    ].filter(Boolean).join(' ');
+      error && styles.helperTextError,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      if (onChange) {
-        onChange(event.target.checked);
+      const next = event.target.checked;
+      if (!isControlled) {
+        setUncontrolledChecked(next);
       }
+      onChange?.(next);
     };
 
     return (
       <div className={wrapperClasses}>
-        <div className={styles.checkboxContainer}>
+        <label className={styles.checkboxContainer}>
           <input
             ref={ref}
             id={checkboxId}
             type="checkbox"
             className={styles.input}
-            checked={checked}
-            disabled={disabled}
+            checked={currentChecked}
             onChange={handleChange}
+            disabled={disabled}
             aria-invalid={!!error}
-            aria-describedby={error ? `${checkboxId}-error` : undefined}
+            aria-describedby={helperText ? `${checkboxId}-helper` : undefined}
             data-indeterminate={indeterminate}
             {...rest}
           />
-          
+
           <span className={styles.checkmark}>
-            {indeterminate && !checked && (
+            {indeterminate && !currentChecked && (
               <span className={styles.indeterminate}></span>
             )}
-            {checked && !indeterminate && (
+            {currentChecked && !indeterminate && (
               <span className={styles.checkmarkIcon}>✓</span>
             )}
           </span>
 
-          {label && (
-            <label htmlFor={checkboxId} className={labelClasses}>
-              {label}
-            </label>
-          )}
-        </div>
+          {label && <span className={labelClasses}>{label}</span>}
+        </label>
 
-        {(error || helperText) && (
-          <div id={`${checkboxId}-error`} className={helperTextClasses}>
-            {error || helperText}
+        {helperText && (
+          <div id={`${checkboxId}-helper`} className={helperTextClasses}>
+            {helperText}
           </div>
         )}
       </div>
     );
-  }
+  },
 );
 
 Checkbox.displayName = 'Checkbox';
 
-export default Checkbox;
+export { Checkbox };

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
-import Modal from './Modal';
+import { Modal } from './Modal';
 import { ModalHeader } from './ModalHeader';
 import { ModalContent } from './ModalContent';
 import { ModalActions } from './ModalActions';
-import Button from '../Button/Button';
+import { Button } from '../Button/Button';
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
@@ -34,9 +34,7 @@ export const Default: Story = {
 
     return (
       <>
-        <Button onClick={() => setIsOpen(true)}>
-          Open Modal
-        </Button>
+        <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
         <Modal {...args} open={isOpen} onClose={() => setIsOpen(false)}>
           <ModalHeader onClose={() => setIsOpen(false)}>
             Modal Title
@@ -70,24 +68,32 @@ export const WithForm: Story = {
 
     return (
       <>
-        <Button onClick={() => setIsOpen(true)}>
-          Open Form Modal
-        </Button>
+        <Button onClick={() => setIsOpen(true)}>Open Form Modal</Button>
         <Modal {...args} open={isOpen} onClose={() => setIsOpen(false)}>
           <ModalHeader onClose={() => setIsOpen(false)}>
             Create Account
           </ModalHeader>
           <ModalContent>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <div
+              style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+            >
               <p>Please fill in the form below:</p>
               <input
                 placeholder="Email"
-                style={{ padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
+                style={{
+                  padding: '8px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                }}
               />
               <input
                 placeholder="Password"
                 type="password"
-                style={{ padding: '8px', border: '1px solid #ccc', borderRadius: '4px' }}
+                style={{
+                  padding: '8px',
+                  border: '1px solid #ccc',
+                  borderRadius: '4px',
+                }}
               />
             </div>
           </ModalContent>
@@ -116,9 +122,7 @@ export const WithoutCloseButton: Story = {
           Open Modal (No Close Button)
         </Button>
         <Modal {...args} open={isOpen} onClose={() => setIsOpen(false)}>
-          <ModalHeader>
-            Modal Without Close Button
-          </ModalHeader>
+          <ModalHeader>Modal Without Close Button</ModalHeader>
           <ModalContent>
             <p>This modal doesn't have a close button in the header.</p>
             <p>You can only close it by clicking outside or pressing Escape.</p>
@@ -173,9 +177,7 @@ export const LongContent: Story = {
 
     return (
       <>
-        <Button onClick={() => setIsOpen(true)}>
-          Open Long Modal
-        </Button>
+        <Button onClick={() => setIsOpen(true)}>Open Long Modal</Button>
         <Modal {...args} open={isOpen} onClose={() => setIsOpen(false)}>
           <ModalHeader onClose={() => setIsOpen(false)}>
             Terms and Conditions
@@ -183,13 +185,17 @@ export const LongContent: Story = {
           <ModalContent>
             <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
               <h3>1. Introduction</h3>
-              <p>These terms and conditions govern your use of this website...</p>
+              <p>
+                These terms and conditions govern your use of this website...
+              </p>
 
               <h3>2. Intellectual Property Rights</h3>
               <p>Other than the content you own, under these Terms...</p>
 
               <h3>3. Restrictions</h3>
-              <p>You are specifically restricted from all of the following...</p>
+              <p>
+                You are specifically restricted from all of the following...
+              </p>
 
               <h3>4. Your Content</h3>
               <p>In these Website Standard Terms and Conditions...</p>

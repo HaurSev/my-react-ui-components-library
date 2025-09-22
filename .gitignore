@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+/dist
 
 # misc
 .DS_Store
@@ -24,3 +24,6 @@ yarn-error.log*
 
 *storybook.log
 storybook-static
+
+# TypeScript declaration files in src
+src/**/*.d.ts

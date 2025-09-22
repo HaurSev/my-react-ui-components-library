@@ -1,5 +1,6 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,6 +19,11 @@ export default [
       },
       clean: false,
     },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'styles.css',
+      }),
+    ],
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx'],
     },
@@ -36,7 +42,7 @@ export default [
         {
           test: /\.module\.css$/i,
           use: [
-            'style-loader',
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
@@ -55,7 +61,7 @@ export default [
           test: /\.css$/i,
           exclude: /\.module\.css$/i,
           use: [
-            'style-loader',
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: { importLoaders: 1 },
@@ -81,6 +87,11 @@ export default [
       },
       clean: false,
     },
+    plugins: [
+      new MiniCssExtractPlugin({
+        filename: 'styles.css',
+      }),
+    ],
     experiments: {
       outputModule: true,
     },
@@ -102,7 +113,7 @@ export default [
         {
           test: /\.module\.css$/i,
           use: [
-            'style-loader',
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
@@ -121,7 +132,7 @@ export default [
           test: /\.css$/i,
           exclude: /\.module\.css$/i,
           use: [
-            'style-loader',
+            MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: { importLoaders: 1 },

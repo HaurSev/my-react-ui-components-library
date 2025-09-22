@@ -1,0 +1,110 @@
+/* Глобальные CSS переменные для библиотеки */
+:root {
+  /* Fonts */
+  --font-family-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+    Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Arial, sans-serif;
+
+  /* Primary Colors */
+  --color-primary: #1976d2;
+  --color-primary-hover: #1565c0;
+  --color-primary-10: rgba(25, 118, 210, 0.1);
+  --color-primary-20: rgba(25, 118, 210, 0.2);
+
+  /* Secondary Colors */
+  --color-secondary: #6c757d;
+  --color-secondary-hover: #5a6268;
+  --color-secondary-10: rgba(108, 117, 125, 0.1);
+
+  /* Error Colors */
+  --color-error: #d32f2f;
+  --color-error-hover: #c62828;
+  --color-error-10: rgba(211, 47, 47, 0.1);
+  --color-error-20: rgba(211, 47, 47, 0.2);
+
+  /* Success Colors */
+  --color-success: #28a745;
+  --color-success-hover: #218838;
+  --color-success-10: rgba(40, 167, 69, 0.1);
+
+  /* Warning Colors */
+  --color-warning: #ff9800;
+  --color-warning-hover: #f57c00;
+  --color-warning-10: rgba(255, 152, 0, 0.1);
+
+  /* Info Colors */
+  --color-info: #17a2b8;
+  --color-info-hover: #138496;
+  --color-info-10: rgba(23, 162, 184, 0.1);
+
+  /* Neutral / Surface Colors */
+  --color-surface: #ffffff;
+  --color-background: #ffffff;
+  --color-border: #ccc;
+  --color-border-strong: #e0e0e0;
+  --color-text: #333;
+  --color-text-muted: #666;
+  --color-disabled: #999;
+  --color-disabled-bg: #f5f5f5;
+
+  /* Focus */
+  --focus-ring: 0 0 0 3px var(--color-primary-20);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+  /* Border Radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+
+  /* Z-index */
+  --z-dropdown: 1000;
+  --z-modal: 1300;
+  --z-tooltip: 1500;
+  --z-toast: 2000;
+}
+
+/* Базовые стили для библиотеки */
+.globalStyles {
+  font-family: var(--font-family-sans);
+  color: var(--color-text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Утилиты для фокуса */
+.focusRing {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* Утилиты для переходов */
+.transitionFast {
+  transition: var(--transition-fast);
+}
+
+.transitionNormal {
+  transition: var(--transition-normal);
+}
+
+.transitionSlow {
+  transition: var(--transition-slow);
+}

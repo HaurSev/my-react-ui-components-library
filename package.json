@@ -4,16 +4,17 @@
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/library.d.ts",
   "sideEffects": [
     "**/*.css"
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/library.d.ts",
       "import": "./dist/index.esm.js",
       "require": "./dist/index.js"
-    }
+    },
+    "./styles": "./dist/styles.css"
   },
   "files": [
     "dist",
@@ -23,7 +24,7 @@
     "build": "webpack --config webpack.lib.config.js",
     "dev": "webpack --config webpack.lib.config.js --watch",
     "devserver": "webpack serve --mode development --open",
-    "types": "tsc --emitDeclarationOnly --declaration --outDir dist",
+    "types": "tsc --project tsconfig.lib.json --emitDeclarationOnly",
     "prepublishOnly": "npm run build && npm run types",
     "lint": "eslint",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,css,md}\"",
